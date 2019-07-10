@@ -7,7 +7,7 @@
 
 #### Relații între entități
 
-![relatii](doc/rel-entitati.png)
+![relatii](Doc/rel-entitati.png)
 
  - comenzi_view - incă nu este folosit în aplicație
  
@@ -15,7 +15,7 @@ Am folosit SQL Server 2017 si EntityFramework 6 cu mici modificari pe codul gene
 
 Pun aici si câteva capturi de ecran:
 
-![exemplu UI](doc/ui-comenzi.png)
+![exemplu UI](Doc/ui-comenzi.png)
 Toate machetele includ un mic toolbar care permite căutarea entităților + operațiile comune de adăugare / modificare / ștergere.
 
  
