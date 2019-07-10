@@ -1,0 +1,39 @@
+﻿<Window x:Class="ProiectComenzi.Produse.EditProdus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProiectComenzi.Parteneri"
+        mc:Ignorable="d"
+        Title="Proprietati produs" d:DesignHeight="137.667" Width="465.333" 
+        ResizeMode="NoResize" ShowInTaskbar="False" 
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
+        >
+    <Grid x:Name="LayoutRoot" Margin="20, 10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Denumire  " />
+        <TextBox Text="{Binding Item.denumire, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" />
+
+        <TextBlock Grid.Row="1" Text="Pret" VerticalAlignment="Center" />
+        <TextBox Text="{Binding Item.pret, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" 
+                 Width="120" HorizontalAlignment="Left" Margin="0,3"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" Margin="0,20,0,0"
+                    HorizontalAlignment="Right">
+            <Button Command="{Binding Cancel}"   Content="Renuntă"  Padding="20,3" Margin="0,0,10,0" />
+            <Button Command="{Binding Save}"  Content="Salvează"  Padding="20,3" />
+        </StackPanel>
+
+    </Grid>
+</Window>

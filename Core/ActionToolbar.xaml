@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="ProiectComenzi.Core.ActionToolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProiectComenzi.Core"
+             mc:Ignorable="d" 
+            >
+    <StackPanel Orientation="Horizontal" Margin="0,10" >
+        <!--<TextBlock Text="Cauta" VerticalAlignment="Center" />-->
+        <TextBox x:Name="txtSearch" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="Introduceti secventa ... si apăsați Enter."
+            Width="200" KeyDown="TxtSearch_KeyDown"/>
+        <Button Command="{Binding Search}" ToolTip="Caută">
+            <Image Source="/ProiectComenzi;component/Resurse/Search.png" Width="24" Height="24" />
+        </Button>
+        <Button Command="{Binding Add}"  Padding="3,0" Margin="20,0,0,0" ToolTip="Adaugă ..." >
+            <Image Source="/ProiectComenzi;component/Resurse/new.png" Width="24" Height="24" />
+        </Button>
+        <Button  Command="{Binding Edit}"  Padding="3,0" Margin="10,0" ToolTip="Modifică ..." >
+            <Image Source="/ProiectComenzi;component/Resurse/edit.png" Width="24" Height="24" />
+        </Button>
+        <Button  Command="{Binding Delete}" Padding="3,0" ToolTip="Șterge ..." >
+            <Image Source="/ProiectComenzi;component/Resurse/delete.png" Width="24" Height="24" />
+        </Button>
+
+    </StackPanel>
+</UserControl>

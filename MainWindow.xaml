@@ -1,0 +1,45 @@
+﻿<Window x:Class="ProiectComenzi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProiectComenzi"
+        mc:Ignorable="d"
+        Title="Comenzi::App" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2"   />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="10">
+            <Button Click="Parteneri" >
+            <StackPanel>
+                    <Image Source="Resurse/parteneri.png" Width="32" Height="32" />
+                    <TextBlock Text="Parteneri" />
+                </StackPanel>
+            </Button>
+
+            <Button Click="Produse"  Margin="0,10">
+                <StackPanel>
+                    <Image Source="Resurse/product.png" Width="32" Height="32" />
+                    <TextBlock Text="Produse" />
+                </StackPanel>
+            </Button>
+
+            <Button Click="Comenzi" >
+                <StackPanel>
+                    <Image Source="Resurse/orders.png" Width="32" Height="32" />
+                    <TextBlock Text="Comenzi" />
+                </StackPanel>
+            </Button>
+            
+        </StackPanel>
+        <Rectangle Grid.Column="1" Fill="LightGray" />
+        <ContentControl Grid.Column="2" x:Name="ContentaArea" Margin="10" >
+            <TextBlock Text="Vă rog selectați o opțiune din meniul alăturat"
+                       FontSize="24" Margin="20" Foreground="LightGray" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </ContentControl>
+    </Grid>
+</Window>

@@ -1,0 +1,93 @@
+﻿<Window x:Class="ProiectComenzi.Comenzi.EditComanda"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProiectComenzi.Comenzi"
+        mc:Ignorable="d"
+        Title="EditComanda" Height="450" Width="800">
+    <Grid x:Name="LayoutRoot" Margin="20, 10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Nr: " VerticalAlignment="Center" />
+            <TextBox Text="{Binding Item.nr, Mode=TwoWay}" Width="120" />
+            <TextBlock Text="Data: " VerticalAlignment="Center"/>
+            <DatePicker  SelectedDate="{Binding Item.data, Mode=TwoWay}" FirstDayOfWeek="Monday" />
+            <TextBlock Text="Partener: " VerticalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding Parteneri}" 
+                      SelectedItem="{Binding Item.parteneri, Mode=TwoWay}" 
+                      DisplayMemberPath="nume"
+                      Width="300" />
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="0,20,0,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Lista produselor din această" VerticalAlignment="Bottom" />
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Margin="0,3">
+                <Button Command="{Binding Add}"  Padding="3,0"  ToolTip="Adaugă ..." >
+                    <Image Source="/ProiectComenzi;component/Resurse/new.png" Width="16" Height="16" />
+                </Button>
+                <Button  Command="{Binding Edit}"  Padding="3,0" Margin="5,0" ToolTip="Modifică ..." >
+                    <Image Source="/ProiectComenzi;component/Resurse/edit.png" Width="16" Height="16" />
+                </Button>
+                <Button  Command="{Binding Delete}" Padding="3,0" ToolTip="Șterge ..." >
+                    <Image Source="/ProiectComenzi;component/Resurse/delete.png" Width="16" Height="16" />
+                </Button>
+
+            </StackPanel>
+        </Grid>
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False"    
+                  CanUserAddRows="False" CanUserDeleteRows="False" 
+                  ItemsSource="{Binding Detalii}"
+                  SelectedItem="{Binding SelectedDetaliu}"
+                  HorizontalGridLinesBrush="#FFD6D3D3"
+                  VerticalGridLinesBrush="#FFD6D3D3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding produse.denumire}" Header="Produs" Width="*" />
+              
+                <DataGridTemplateColumn Header="Cantitate" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding cant}" VerticalAlignment="Center" Margin="3,0" TextAlignment="Right" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Preț" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding produse.pret}" VerticalAlignment="Center" Margin="3,0" TextAlignment="Right" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Valoare" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding valoare, StringFormat=########0.00}" VerticalAlignment="Center" Margin="3,0" TextAlignment="Right" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,10">
+            <TextBlock Text="TOTAL:"  />
+            <TextBox Text="{Binding Total, Mode=OneWay, StringFormat=#########.00}" IsEnabled="False" Width="120" TextAlignment="Right" VerticalAlignment="Top"
+                      Background="#FFD6D3D3"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="3" Margin="0,20,0,0"
+                    HorizontalAlignment="Right">
+            <Button Command="{Binding Cancel}"   Content="Renuntă"  Padding="20,3" Margin="0,0,10,0" />
+            <Button Command="{Binding Save}"  Content="Salvează"  Padding="20,3" />
+        </StackPanel>
+
+    </Grid>
+</Window>

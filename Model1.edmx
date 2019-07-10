@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="comenziModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="comenzi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_partener" Type="int" Nullable="false" />
+          <Property Name="nr" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="data" Type="date" />
+        </EntityType>
+        <EntityType Name="comenzi_detaliu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_comanda" Type="int" Nullable="false" />
+          <Property Name="id_produs" Type="int" Nullable="false" />
+          <Property Name="cant" Type="decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="parteneri">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nume" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tel" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="produse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="denumire" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pret" Type="decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Comenzi.dbo.Comenzi_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Comenzi_view">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nr" />
+            <PropertyRef Name="nume" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nr" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="data" Type="date" />
+          <Property Name="nume" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tel" Type="varchar" MaxLength="30" />
+          <Property Name="valoare" Type="decimal" Precision="38" Scale="4" />
+        </EntityType>
+        <Association Name="FK__comenzi__id_part__4F7CD00D">
+          <End Role="parteneri" Type="Self.parteneri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comenzi" Type="Self.comenzi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parteneri">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comenzi">
+              <PropertyRef Name="id_partener" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comenzi_d__id_co__534D60F1">
+          <End Role="comenzi" Type="Self.comenzi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comenzi_detaliu" Type="Self.comenzi_detaliu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comenzi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comenzi_detaliu">
+              <PropertyRef Name="id_comanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comenzi_d__id_pr__5441852A">
+          <End Role="produse" Type="Self.produse" Multiplicity="1" />
+          <End Role="comenzi_detaliu" Type="Self.comenzi_detaliu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produse">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comenzi_detaliu">
+              <PropertyRef Name="id_produs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="comenziModelStoreContainer">
+          <EntitySet Name="comenzi" EntityType="Self.comenzi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comenzi_detaliu" EntityType="Self.comenzi_detaliu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parteneri" EntityType="Self.parteneri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="produse" EntityType="Self.produse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comenzi_view" EntityType="Self.Comenzi_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Comenzi_view].[id] AS [id], 
+    [Comenzi_view].[nr] AS [nr], 
+    [Comenzi_view].[data] AS [data], 
+    [Comenzi_view].[nume] AS [nume], 
+    [Comenzi_view].[tel] AS [tel], 
+    [Comenzi_view].[valoare] AS [valoare]
+    FROM [dbo].[Comenzi_view] AS [Comenzi_view]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__comenzi__id_part__4F7CD00D" Association="Self.FK__comenzi__id_part__4F7CD00D">
+            <End Role="parteneri" EntitySet="parteneri" />
+            <End Role="comenzi" EntitySet="comenzi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comenzi_d__id_co__534D60F1" Association="Self.FK__comenzi_d__id_co__534D60F1">
+            <End Role="comenzi" EntitySet="comenzi" />
+            <End Role="comenzi_detaliu" EntitySet="comenzi_detaliu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comenzi_d__id_pr__5441852A" Association="Self.FK__comenzi_d__id_pr__5441852A">
+            <End Role="produse" EntitySet="produse" />
+            <End Role="comenzi_detaliu" EntitySet="comenzi_detaliu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="comenziModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="comenzi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_partener" Type="Int32" Nullable="false" />
+          <Property Name="nr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="parteneri" Relationship="Self.FK__comenzi__id_part__6C190EBB" FromRole="comenzi" ToRole="parteneri" />
+          <NavigationProperty Name="comenzi_detaliu" Relationship="Self.FK__comenzi_d__id_co__6EF57B66" FromRole="comenzi" ToRole="comenzi_detaliu" />
+        </EntityType>
+        <EntityType Name="comenzi_detaliu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_comanda" Type="Int32" Nullable="false" />
+          <Property Name="id_produs" Type="Int32" Nullable="false" />
+          <Property Name="cant" Type="Decimal" Precision="14" Scale="2" />
+          <NavigationProperty Name="comenzi" Relationship="Self.FK__comenzi_d__id_co__6EF57B66" FromRole="comenzi_detaliu" ToRole="comenzi" />
+          <NavigationProperty Name="produse" Relationship="Self.FK__comenzi_d__id_pr__6FE99F9F" FromRole="comenzi_detaliu" ToRole="produse" />
+        </EntityType>
+        <EntityType Name="parteneri">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nume" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="comenzis" Relationship="Self.FK__comenzi__id_part__6C190EBB" FromRole="parteneri" ToRole="comenzi" />
+        </EntityType>
+        <EntityType Name="produse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="denumire" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pret" Type="Decimal" Precision="14" Scale="2" />
+          <NavigationProperty Name="comenzi_detaliu" Relationship="Self.FK__comenzi_d__id_pr__6FE99F9F" FromRole="produse" ToRole="comenzi_detaliu" />
+        </EntityType>
+        <EntityType Name="Comenzi_view">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nr" />
+            <PropertyRef Name="nume" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data" Type="DateTime" Precision="0" />
+          <Property Name="nume" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="valoare" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
+        <Association Name="FK__comenzi__id_part__6C190EBB">
+          <End Role="parteneri" Type="Self.parteneri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comenzi" Type="Self.comenzi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parteneri">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comenzi">
+              <PropertyRef Name="id_partener" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comenzi_d__id_co__6EF57B66">
+          <End Role="comenzi" Type="Self.comenzi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comenzi_detaliu" Type="Self.comenzi_detaliu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comenzi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comenzi_detaliu">
+              <PropertyRef Name="id_comanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comenzi_d__id_pr__6FE99F9F">
+          <End Role="produse" Type="Self.produse" Multiplicity="1" />
+          <End Role="comenzi_detaliu" Type="Self.comenzi_detaliu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produse">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comenzi_detaliu">
+              <PropertyRef Name="id_produs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="comenziEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="comenzis" EntityType="Self.comenzi" />
+          <EntitySet Name="comenzi_detaliu" EntityType="Self.comenzi_detaliu" />
+          <EntitySet Name="parteneris" EntityType="Self.parteneri" />
+          <EntitySet Name="produses" EntityType="Self.produse" />
+          <EntitySet Name="Comenzi_view" EntityType="Self.Comenzi_view" />
+          <AssociationSet Name="FK__comenzi__id_part__6C190EBB" Association="Self.FK__comenzi__id_part__6C190EBB">
+            <End Role="parteneri" EntitySet="parteneris" />
+            <End Role="comenzi" EntitySet="comenzis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comenzi_d__id_co__6EF57B66" Association="Self.FK__comenzi_d__id_co__6EF57B66">
+            <End Role="comenzi" EntitySet="comenzis" />
+            <End Role="comenzi_detaliu" EntitySet="comenzi_detaliu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comenzi_d__id_pr__6FE99F9F" Association="Self.FK__comenzi_d__id_pr__6FE99F9F">
+            <End Role="produse" EntitySet="produses" />
+            <End Role="comenzi_detaliu" EntitySet="comenzi_detaliu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="comenziModelStoreContainer" CdmEntityContainer="comenziEntities">
+          <EntitySetMapping Name="comenzis">
+            <EntityTypeMapping TypeName="comenziModel.comenzi">
+              <MappingFragment StoreEntitySet="comenzi">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_partener" ColumnName="id_partener" />
+                <ScalarProperty Name="nr" ColumnName="nr" />
+                <ScalarProperty Name="data" ColumnName="data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comenzi_detaliu">
+            <EntityTypeMapping TypeName="comenziModel.comenzi_detaliu">
+              <MappingFragment StoreEntitySet="comenzi_detaliu">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_comanda" ColumnName="id_comanda" />
+                <ScalarProperty Name="id_produs" ColumnName="id_produs" />
+                <ScalarProperty Name="cant" ColumnName="cant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parteneris">
+            <EntityTypeMapping TypeName="comenziModel.parteneri">
+              <MappingFragment StoreEntitySet="parteneri">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nume" ColumnName="nume" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="produses">
+            <EntityTypeMapping TypeName="comenziModel.produse">
+              <MappingFragment StoreEntitySet="produse">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="denumire" ColumnName="denumire" />
+                <ScalarProperty Name="pret" ColumnName="pret" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comenzi_view">
+            <EntityTypeMapping TypeName="comenziModel.Comenzi_view">
+              <MappingFragment StoreEntitySet="Comenzi_view">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nr" ColumnName="nr" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="nume" ColumnName="nume" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="valoare" ColumnName="valoare" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

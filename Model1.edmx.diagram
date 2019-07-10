@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="555e6e9371fb4bb58b731fcab49e86c6" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="comenziModel.comenzi" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="comenziModel.comenzi_detaliu" Width="1.5" PointX="2" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="comenziModel.parteneri" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="comenziModel.produse" Width="1.5" PointX="4.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="comenziModel.Comenzi_view" Width="1.5" PointX="5.625" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="comenziModel.FK__comenzi__id_part__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="comenziModel.FK__comenzi_d__id_co__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="comenziModel.FK__comenzi_d__id_pr__6FE99F9F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
